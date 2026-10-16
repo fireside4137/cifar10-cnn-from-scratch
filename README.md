@@ -211,7 +211,7 @@ Epoch [25/25] Train Loss: 1.0196 | Val Loss: 0.7309 | Val Accuracy: 74.57%
 The project includes two interactive interfaces to suit both permanent cloud deployment and instant local/remote sharing:
 
 ### 1. Streamlit Web Application ([`streamlit_app.py`](file:///Users/swapnil/Desktop/Projects/CNN/streamlit_app.py)) — Cloud Deployment
-* **Live Demo**: [https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app](https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app)
+* **Live Demo**: [https://cifar10-cnn-from-scratch-prototype.streamlit.app](https://cifar10-cnn-from-scratch-prototype.streamlit.app)
 * **Features**:
   * Optimized model caching with `@st.cache_resource` for zero-latency inference.
   * Drag & drop file uploader or direct camera capture.
