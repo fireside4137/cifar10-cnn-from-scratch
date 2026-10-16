@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Large dataset directory (CIFAR-10 is auto-downloadable via torchvision)
+data/
+*.tar.gz
+*.bin
+
+# Environment & Virtualenv
+.env
+.venv
+env/
+venv/
+ENV/
+conda-env/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# IDE configuration
+.vscode/
+.idea/
