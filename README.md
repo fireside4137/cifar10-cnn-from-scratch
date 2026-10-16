@@ -142,6 +142,7 @@ The network displays textbook **high variance (overfitting)**:
 │   └── predict.py            # Single-image inference CLI
 ├── weights/
 │   └── cifar10_cnn.pth       # Saved model checkpoint (~2.4 MB)
+├── app.py                    # Interactive Gradio web application
 ├── requirements.txt          # Python environment dependencies
 ├── .gitignore                # Excludes large data/ folder and checkpoints
 ├── LICENSE                   # MIT License
@@ -190,6 +191,15 @@ Predict the class of any local image:
 ```bash
 python src/predict.py --image path/to/sample.jpg --weights weights/cifar10_cnn.pth
 ```
+
+### Running the Web Prototype (Gradio)
+
+Launch the interactive local web application:
+
+```bash
+python app.py
+```
+Then open `http://localhost:7860` in your browser to drag & drop any image and view real-time top-3 predictions.
 
 ### Running the Notebook
 
