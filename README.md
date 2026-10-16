@@ -2,11 +2,14 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app)
 [![Gradio](https://img.shields.io/badge/UI-Gradio-orange.svg)](app.py)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Dataset](https://img.shields.io/badge/Dataset-CIFAR--10-green.svg)](https://www.cs.toronto.edu/~kriz/cifar.html)
 
-An end-to-end Computer Vision project implementing, analyzing, and deploying a custom 3-stage Convolutional Neural Network (CNN) from scratch using **PyTorch** on the **CIFAR-10** benchmark dataset. Includes an empirical study of the **overfitting phenomenon**, resolution via modern regularization (**BatchNorm**, **Dropout**, **Data Augmentation**), and a working **Gradio** web prototype.
+> 🌐 **Live Demo**: [https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app](https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app) *(Replace with your live Streamlit Cloud URL once deployed)*
+
+An end-to-end Computer Vision project implementing, analyzing, and deploying a custom 3-stage Convolutional Neural Network (CNN) from scratch using **PyTorch** on the **CIFAR-10** benchmark dataset. Includes an empirical study of the **overfitting phenomenon**, resolution via modern regularization (**BatchNorm**, **Dropout**, **Data Augmentation**), and dual working web prototypes (**Streamlit** & **Gradio**).
 
 ---
 
@@ -19,12 +22,14 @@ An end-to-end Computer Vision project implementing, analyzing, and deploying a c
   - [Phase 1: Baseline Architecture & Severe Overfitting](#phase-1-baseline-architecture--severe-overfitting)
   - [Phase 2: Architectural & Pipeline Interventions](#phase-2-architectural--pipeline-interventions)
   - [Phase 3: Enhanced Regularized Results (25 Epochs)](#phase-3-enhanced-regularized-results-25-epochs)
-- [Interactive Web Prototype (Gradio)](#-interactive-web-prototype-gradio)
+- [Interactive Web Prototypes (Streamlit & Gradio)](#-interactive-web-prototypes-streamlit--gradio)
+  - [Streamlit Web Application (Primary Cloud Deployment)](#1-streamlit-web-application-streamlit_apppy--cloud-deployment)
+  - [Gradio Web Application (Instant Live Link)](#2-gradio-web-application-apppy--instant-live-tunnel)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-  - [Running the Web Prototype](#running-the-web-prototype)
+  - [Running the Web Prototypes](#running-the-web-prototypes)
   - [Training via CLI](#training-via-cli)
   - [Inference on an Image](#inference-on-an-image)
   - [Running the Interactive Notebook](#running-the-interactive-notebook)
@@ -40,7 +45,7 @@ This project explores deep learning visual recognition fundamentals from mathema
 - **Custom Architecture**: Built an explicit 3-stage feature extractor using 2D convolutions, batch normalization, spatial pooling, and dual-level dropout.
 - **Data Pipeline**: Constructed modular PyTorch `DataLoader` pipelines with dynamic data augmentation for training and deterministic normalization for evaluation.
 - **Empirical Diagnostics**: Investigated a real-world bias-variance trade-off where training loss dropped to $0.14$ while validation loss diverged, diagnosing the root cause and applying targeted regularizations.
-- **Working Prototype**: Packaged the inference pipeline into an interactive Gradio web application with real-time confidence scoring and top-3 class distribution visualization.
+- **Dual Working Prototypes**: Packaged the inference pipeline into both **Streamlit** (for 100% free cloud deployment via Streamlit Community Cloud) and **Gradio** (with automatic public URL generation via `share=True`).
 
 ---
 
@@ -201,19 +206,41 @@ Epoch [25/25] Train Loss: 1.0196 | Val Loss: 0.7309 | Val Accuracy: 74.57%
 
 ---
 
-## 💻 Interactive Web Prototype (Gradio)
+## 💻 Interactive Web Prototypes (Streamlit & Gradio)
 
-The model is packaged into an interactive Gradio web application ([`app.py`](file:///Users/swapnil/Desktop/Projects/CNN/app.py)):
+The project includes two interactive interfaces to suit both permanent cloud deployment and instant local/remote sharing:
 
-- **Inference Pipeline**: Takes any image format, resizes to $32 \times 32$, normalizes, and passes through the trained PyTorch model.
-- **Visual Feedback**: Displays animated horizontal probability progress bars for the **Top-3 predicted classes**.
-- **Input Flexibility**: Drag & drop files, paste directly from clipboard, or capture live using a webcam.
+### 1. Streamlit Web Application ([`streamlit_app.py`](file:///Users/swapnil/Desktop/Projects/CNN/streamlit_app.py)) — Cloud Deployment
+* **Live Demo**: [https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app](https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app)
+* **Features**:
+  * Optimized model caching with `@st.cache_resource` for zero-latency inference.
+  * Drag & drop file uploader or direct camera capture.
+  * Top-1 dominant class with emoji badge, Top-3 animated progress meters, and an expandable 10-class breakdown table.
+  * Informational sidebar summarizing network parameters and hardware device.
 
 ```bash
 # Run locally
+streamlit run streamlit_app.py
+```
+
+#### How to Deploy for Free to Streamlit Community Cloud:
+1. Push this repository to your GitHub account.
+2. Go to [share.streamlit.io](https://share.streamlit.io) and log in with your GitHub account.
+3. Click **"New app"** $\to$ Select this repository $\to$ Set the main file path to `streamlit_app.py`.
+4. Click **Deploy!** Your app will be live with a permanent URL.
+
+---
+
+### 2. Gradio Web Application ([`app.py`](file:///Users/swapnil/Desktop/Projects/CNN/app.py)) — Instant Live Tunnel
+* **Features**:
+  * Configured with **`share=True`** by default.
+  * Automatically spins up a local server (`http://localhost:7860`) **and** generates a secure, free public link (`https://xxxx.gradio.live`) valid for 72 hours.
+  * Clean Soft UI theme with top-3 horizontal confidence bars.
+
+```bash
+# Run Gradio app (generates public live link automatically)
 python app.py
 ```
-*Access in browser at: `http://localhost:7860`*
 
 ---
 
@@ -229,8 +256,9 @@ python app.py
 │   └── predict.py            # CLI inference tool for individual images
 ├── weights/
 │   └── cifar10_cnn.pth       # Saved model checkpoint (~2.4 MB)
-├── app.py                    # Interactive Gradio web application
-├── requirements.txt          # Project dependencies (torch, torchvision, gradio)
+├── app.py                    # Interactive Gradio web application (with share=True)
+├── streamlit_app.py          # Interactive Streamlit web application (cloud ready)
+├── requirements.txt          # Project dependencies (torch, torchvision, streamlit, gradio)
 ├── .gitignore                # Excludes large data/ folder and checkpoints
 ├── LICENSE                   # MIT License
 └── README.md                 # Project documentation
@@ -263,12 +291,15 @@ python app.py
    pip install -r requirements.txt
    ```
 
-### Running the Web Prototype
+### Running the Web Prototypes
 
 ```bash
+# Option 1: Streamlit (Recommended for cloud hosting)
+streamlit run streamlit_app.py
+
+# Option 2: Gradio (Generates instant public link)
 python app.py
 ```
-Open `http://localhost:7860` in your web browser.
 
 ### Training via CLI
 
@@ -310,7 +341,8 @@ jupyter notebook CNN_for_CIFAR10.ipynb
 - [x] Batch Normalization (`nn.BatchNorm2d`)
 - [x] Spatial & Dense Dropout (`nn.Dropout2d`, `nn.Dropout`)
 - [x] Real-time Data Augmentation (`RandomCrop`, `RandomHorizontalFlip`)
-- [x] Interactive Gradio web prototype (`app.py`)
+- [x] Interactive Streamlit web prototype (`streamlit_app.py`)
+- [x] Interactive Gradio web prototype with public tunneling (`app.py`)
 - [ ] Learning Rate Scheduling (Cosine Annealing)
 - [ ] ResNet-18 Transfer Learning benchmark
 
