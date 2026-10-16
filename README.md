@@ -2,12 +2,12 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://cifar10-cnn-from-scratch-prototype.streamlit.app/)
 [![Gradio](https://img.shields.io/badge/UI-Gradio-orange.svg)](app.py)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Dataset](https://img.shields.io/badge/Dataset-CIFAR--10-green.svg)](https://www.cs.toronto.edu/~kriz/cifar.html)
 
-> 🌐 **Live Demo**: [https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app](https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app) *(Replace with your live Streamlit Cloud URL once deployed)*
+> 🌐 **Live Demo**: [https://cifar10-cnn-from-scratch-prototype.streamlit.app](https://<YOUR-STREAMLIT-APP-NAME>.streamlit.app) *(Replace with your live Streamlit Cloud URL once deployed)*
 
 An end-to-end Computer Vision project implementing, analyzing, and deploying a custom 3-stage Convolutional Neural Network (CNN) from scratch using **PyTorch** on the **CIFAR-10** benchmark dataset. Includes an empirical study of the **overfitting phenomenon**, resolution via modern regularization (**BatchNorm**, **Dropout**, **Data Augmentation**), and dual working web prototypes (**Streamlit** & **Gradio**).
 
